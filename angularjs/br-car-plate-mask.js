@@ -78,8 +78,6 @@ function plateMask($timeout) {
 
         function onKeyPress(pressEvent) {
 
-            console.log('keypress', cleanValue.length);
-
             if (pressEvent.keyCode !== 8) { // backspace
 
                 return;
@@ -87,8 +85,7 @@ function plateMask($timeout) {
 
             if (cleanValue.length <= 3) {
 
-                input[0].blur();
-                input[0].focus();
+                blurFocusInputValue();
             }
         }
 
@@ -100,13 +97,11 @@ function plateMask($timeout) {
         function moveCursorToEnd() {
 
             input[0].setSelectionRange(8, 8);
-            input[0].blur();
-            input[0].focus();
+
+            blurFocusInputValue();
         }
 
         function changeKeyboard() {
-
-            console.log('focus', typedValue.length);
 
             if (input[0].value.length <= 3) {
 
@@ -118,6 +113,15 @@ function plateMask($timeout) {
 
                 input[0].type = 'tel';
             }
+        }
+
+        function blurFocusInputValue() {
+
+            input[0].blur();
+
+            changeKeyboard();
+
+            input[0].focus();
         }
 
         function isPlatePattern(cleanValue) {
